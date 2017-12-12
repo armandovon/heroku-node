@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp">
+    <head>
+
+        <!--Bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/main.css" />
+    </head>
+    <body>
+        <article class="container" data-ng-controller = "errandController">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Ärendehanteringssystem</h1>
+                    <p class = "error">{{error}}</p>
+                </div>
+
+                <!--Lägga till ärende-->
+                <div class="col-md-6">
+                    <input type="text" data-ng-model="description" placeholder="Beskrivning..." />
+                    <button data-ng-click = 'addErrand(description)' id="addErrand">Skapa ärende</button>
+                </div>
+
+                <!--Filtreringen-->
+                <div class="col-md-6">
+                    <input type="text" data-ng-model = "filterString" data-ng-change = "setFilter()" placeholder="filter..." />
+                    <select data-ng-options = "option for option in options" data-ng-model = "selectedItem" data-ng-change = "selectedItemChanged()"></select>
+                </div>
+
+            </div><!--slut row-->
+
+            <!--Tabellen innehållandes datan från mongoDB-->
+            <table class="table table-bordered">
+                <tr>
+                    <th>Status</th>
+                    <th>Beskrivning</th>
+                    <th>Skapad</th>
+                    <th>ID</th>
+                </tr>
+                <!--Loopar igenom datan och skriver ut i rader-->
+                <tr data-ng-repeat = "e in Filtered | orderBy:column:reverse">
+                    <td><input id='checkBox'  type='checkbox' data-ng-model="e.status" data-ng-checked = "{{e.status}}" data-ng-change = "updateStatus({{e.id}}, '{{e.status}}')"></td>
+                    <td>{{e.description}}</td>
+                    <td>{{e.date | date: "yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td>{{e.id}}</td>
+                </tr>
+            </table>
+            <!--antal ärenden-->
+            <p><strong>Antal ärenden: </strong>{{id}}</p>
+        
+        </article><!--Slut container-->
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

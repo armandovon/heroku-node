@@ -1,0 +1,33 @@
+h1 {
+    margin:40px 0;
+}
+
+table {
+    margin: 20px 0;
+}
+
+#addErrand {
+    background-color: #0088CC;
+    color:white;
+    border: none;
+    border-radius:5px;
+    height:35px;
+    padding:5px;
+}
+
+select, input {
+    height:35px;
+    border-radius:2px;
+}
+
+#addErrand:hover, select:hover {
+    cursor:pointer;
+}
+
+.bgRow {
+    background-color: green;
+}
+
+.error {
+    color:red;
+}
