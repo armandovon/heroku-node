@@ -19,7 +19,7 @@ app.all('/*', function(req, res, next){
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Port
-var port = 3000;
+var port = process.env.PORT || 8080;
 
 //Starta servern
 app.listen(port, function(){
